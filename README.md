@@ -22,9 +22,9 @@ USART2_RX  PD9      重定义而来，PB11已用于MOTOR2输出PWM
 - 陀螺仪 HWT101
 UART4_TX  PC10
 UART4_RX  PC11
-- 扫码模块 XM1605
-UART5_TX   PC12
-UART5_RX   PD2
+
+
+
 
 ### 按键区
 - 一键启动按钮
@@ -37,6 +37,9 @@ PE3
 - OLED 0.96寸
 SCL    PD4
 SDA    PD1
+- 颜色识别传感器 感为
+SCL   PC12
+SDA   PD2
 
 ### 舵机区
 - Servo1   ==暂时没有用到==

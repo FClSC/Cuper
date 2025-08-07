@@ -15,7 +15,8 @@ void system_Init(void)
 	UART1_Init();
 	UART2_Init();
 	UART4_Init();
-	UART5_Init();
+	I2C_GPIO_Init();
+	//UART5_Init();
 	TIM6_COUNT_Init();
 	delay_ms(50);
 	WS2812_Init();

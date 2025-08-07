@@ -37,101 +37,36 @@ int main(void)
 	ResetAng_Z(); 
 
 	// 初始化动作
-	//arrive_most_up();
-	// delay_ms(200);
-	// claw_turn1();
-	// claw_open();
-
-	
+	claw_open();
+	delay_ms(200);
 	arrive_most_up();
-	delay_ms(1000);
-	//	claw_put_block1();
-	//	delay_ms(1000);
-	//	claw_put_block2();
-	//	delay_ms(1000);
-	//	claw_put_block3();
-	//	delay_ms(1000);
-	//	claw_put_block4();
-	//	delay_ms(1000);
-	//	claw_put_block5();
-	//	delay_ms(1000);
-	//	claw_put_block5();
-	// claw_turn1();
-	// delay_ms(600);
-	// claw_turn2();
-	// delay_ms(600);
-	// claw_turn3();
-	// delay_ms(600);
-	// claw_turn4();
-	// delay_ms(600);
-	// claw_turn5();
-	// delay_ms(600);
-
-	// arrive_car_put();
-
-//	MOTOR_Displacement(20,0);
-//			while(1)
-//			{
-//				if(stepPosition == distance)
-//				{
-//					break;
-//				}
-//			}
-
-//	delay_ms(3000);
-//	MOTOR_Displacement(0,20);
-//			while(1)
-//			{
-//				if(stepPosition == distance)
-//				{
-//					break;
-//				}
-//			}
-			int angle = 90;
-			MOTOR_Angle(90);
-			while(1)
-			{
-				if(stepPosition == angle_temp)
-				{
-					break;
-				}
-			}	
-
-
-			if(angle>0)base_angle+=90; 
-			else base_angle-=90;
-
-			if(base_angle>180)//270
-			{
-				base_angle=-90;
-			}
-			else if(base_angle<-180)//-270
-			{
-				base_angle=90; 
-			}
-
-            delay_ms(100);
-
-			MOTOR_Align();
-
-			
-
+	delay_ms(300);
+	claw_turn1();
+	int color = 0;
 
 	
+
+
+
 
 	while(1)              //主代码
 	{
 
 
 
-
-
+		I2C_Read_Sensor(color_value); //读取颜色传感器数据
+		color = getClosestColor(color_value); //获取最接近的颜色
+		OLED_ClearArea(0, 48, 128, 16); //清除OLED屏幕
 		OLED_Printf(0,0,OLED_8X16,"Angle=%.3f",global_angle);
 		OLED_Printf(0,16,OLED_8X16,"BaseAngle=");
 		OLED_ShowSignedNum(64,16,base_angle,3,OLED_8X16);
 		OLED_Printf(0,32,OLED_8X16,"Err_Angle=%.3f",global_angle-base_angle);
 
+		OLED_Printf(0,48,OLED_8X16,"%d %d %d %d",color_value[0], color_value[1], color_value[2],color);
+
+
 		OLED_Update();
+		delay_ms(1000);
 	
 
 		if(Key_Get() == 1)//一键启动，如果按下，给工控机发送启动指令，同时令目标角度和串口屏显示为0
@@ -165,23 +100,23 @@ int main(void)
 			UART_SendPacket2UP(0x01);
 		}
 
-		if(Serial5_GetRxFlag() == 1)//如果接收到了扫码发来的数据就处理
-		{
+		// if(Serial5_GetRxFlag() == 1)//如果接收到了扫码发来的数据就处理
+		// {
 
-			delay_ms(300);//等待数据接收完全
-			UART5_ParseCode(UART5_RX_BUF,&code1,&code2);//解析出二维码数据，此时UART5_BUX中依然存放的是二维码数据	
-			u2_printf("tt3.txt=\"%d+%d\"",code1,code2);//多次发送给串口屏
-			delay_ms(10);
-			u2_printf("tt3.txt=\"%d+%d\"",code1,code2); 
-			delay_ms(10);
-			u2_printf("t3.txt=\"%d+%d\"",code1,code2);
-			delay_ms(10);
-			u2_printf("t3.txt=\"%d+%d\"",code1,code2);
-			delay_ms(10);
-			u2_printf("tt3.txt=\"%d+%d\"",code1,code2);
-			delay_ms(10);			
+		// 	delay_ms(300);//等待数据接收完全
+		// 	UART5_ParseCode(UART5_RX_BUF,&code1,&code2);//解析出二维码数据，此时UART5_BUX中依然存放的是二维码数据	
+		// 	u2_printf("tt3.txt=\"%d+%d\"",code1,code2);//多次发送给串口屏
+		// 	delay_ms(10);
+		// 	u2_printf("tt3.txt=\"%d+%d\"",code1,code2); 
+		// 	delay_ms(10);
+		// 	u2_printf("t3.txt=\"%d+%d\"",code1,code2);
+		// 	delay_ms(10);
+		// 	u2_printf("t3.txt=\"%d+%d\"",code1,code2);
+		// 	delay_ms(10);
+		// 	u2_printf("tt3.txt=\"%d+%d\"",code1,code2);
+		// 	delay_ms(10);			
 
-		}
+		// }
 		
 	}	 
 	

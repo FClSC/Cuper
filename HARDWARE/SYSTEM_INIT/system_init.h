@@ -14,6 +14,7 @@
 #include "time_count.h"
 #include "contral_claw.h"
 #include "ws2812.h"
+#include "colorreco.h"
 
 void system_Init(void);
 

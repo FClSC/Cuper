@@ -911,7 +911,7 @@ void uart_handle(void)
 		}			
 		case 0x04:  //让单片机扫码
 		{
-			UART5_Start_Scan();//发送扫码指令
+			// UART5_Start_Scan();//发送扫码指令
 			// while(1)//如果没有接收到数据就一直等待
 			// {
 			// 	if(Serial5_GetRxFlag() == 1)//接收到了数据就处理
@@ -1506,7 +1506,7 @@ void uart_handle(void)
 		{
 			UART1_SendString((uint8_t*)UART5_RX_BUF);  //给树莓派发送二维码信息
 
-			UART5_ParseCode(UART5_RX_BUF,&code1,&code2);//解析出二维码数据，此时UART5_BUX中依然存放的是二维码数据	
+			// UART5_ParseCode(UART5_RX_BUF,&code1,&code2);//解析出二维码数据，此时UART5_BUX中依然存放的是二维码数据	
 
 			// unsigned char data[8] ;
 			// data[0]=0xAB;
@@ -1731,7 +1731,7 @@ void claw_close2(void)
 **********************/
 void claw_open1(void)
 {
-		servo_angle2=70;    //71
+		servo_angle2=74;    //71
 		SERVO2_CONTRAL(servo_angle2);
 		delay_ms(25);
 		SERVO2_CONTRAL(servo_angle2);

@@ -335,6 +335,7 @@ void claw_get_block1(void)
 {
 	claw_turn0();
 	claw_open();
+	delay_ms(300);
 	arrive_block_get();
 	delay_ms(300);
 	claw_close();
@@ -360,6 +361,7 @@ void claw_get_block2(void)
 {
 	claw_turn0();
 	claw_open();
+	delay_ms(300);
 	arrive_block_get();
 	delay_ms(300);
 	claw_close();
@@ -372,7 +374,7 @@ void claw_get_block2(void)
 //	delay_ms(200);
 	arrive_most_up();	
 	//support_turn120();
-	claw_open();
+	// claw_open();
 
 }
 
@@ -385,6 +387,7 @@ void claw_get_block3(void)
 {
 	claw_turn0();
 	claw_open();
+	delay_ms(300);
 	arrive_block_get();
 	delay_ms(300);
 	claw_close();
@@ -410,6 +413,7 @@ void claw_get_block4(void)
 {
 	claw_turn0();
 	claw_open();
+	delay_ms(300);
 	arrive_block_get();
 	delay_ms(300);
 	claw_close();
@@ -435,6 +439,7 @@ void claw_get_block5(void)
 {
 	claw_turn0();
 	claw_open();
+	delay_ms(300);
 	arrive_block_get();
 	delay_ms(300);
 	claw_close();
@@ -487,6 +492,7 @@ void claw_put_block1(void)
 {
     
 	arrive_most_up(); 
+	delay_ms(200);
 	claw_open1();   
 	claw_turn1();
 	delay_ms(600);
@@ -515,6 +521,7 @@ void claw_put_block2(void)
 {
     
 	arrive_most_up(); 
+	delay_ms(200);
 	claw_open1();   
 	claw_turn2();
 	delay_ms(600);
@@ -544,6 +551,7 @@ void claw_put_block3(void)
 {
     
 	arrive_most_up(); 
+	delay_ms(200);
 	claw_open1();   
 	claw_turn3();
 	delay_ms(600);
@@ -573,6 +581,7 @@ void claw_put_block4(void)
 {
     
 	arrive_most_up(); 
+	delay_ms(200);
 	claw_open1();   
 	claw_turn4();
 	delay_ms(1200);
@@ -602,6 +611,7 @@ void claw_put_block5(void)
 {
     
 	arrive_most_up(); 
+	delay_ms(200);
 	claw_open1();   
 	claw_turn5();
 	delay_ms(1200);
