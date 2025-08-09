@@ -42,7 +42,17 @@ int main(void)
 	arrive_most_up();
 	delay_ms(300);
 	claw_turn1();
-	int color = 0;
+
+
+	delay_ms(600);
+	claw_turn0();
+	delay_ms(200);
+	arrive_most_down(); //到达最低高度
+
+	delay_ms(200);
+	arrive_circle_capture(); 
+
+
 
 	
 
@@ -53,9 +63,10 @@ int main(void)
 	{
 
 
+		// I2C_Read_Sensor(color_value);
+		// color = getClosestColor(color_value);
 
-		I2C_Read_Sensor(color_value); //读取颜色传感器数据
-		color = getClosestColor(color_value); //获取最接近的颜色
+
 		OLED_ClearArea(0, 48, 128, 16); //清除OLED屏幕
 		OLED_Printf(0,0,OLED_8X16,"Angle=%.3f",global_angle);
 		OLED_Printf(0,16,OLED_8X16,"BaseAngle=");
@@ -63,10 +74,10 @@ int main(void)
 		OLED_Printf(0,32,OLED_8X16,"Err_Angle=%.3f",global_angle-base_angle);
 
 		OLED_Printf(0,48,OLED_8X16,"%d %d %d %d",color_value[0], color_value[1], color_value[2],color);
-
+		
 
 		OLED_Update();
-		delay_ms(1000);
+
 	
 
 		if(Key_Get() == 1)//一键启动，如果按下，给工控机发送启动指令，同时令目标角度和串口屏显示为0

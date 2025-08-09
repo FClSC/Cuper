@@ -1,6 +1,7 @@
 #include "colorreco.h"
 
 uint8_t color_value[3] = {0, 0, 0}; // 存储颜色值
+int color = 0;
 
 void I2C_GPIO_Init(void)
 {
@@ -105,14 +106,14 @@ void I2C_Read_Sensor(uint8_t *recv_value)
 {
     I2C_Start();  // 发送起始信号
                               //                                默认 跳线帽设置  读写位
-    I2C_SendByte(0x48 << 1);  // 发送从机地址（写模式） 从机地址为 1001 000        X      0x48为 0100 1000
+    I2C_SendByte(0x4F << 1);  // 发送从机地址（写模式） 从机地址为 1001 111        X      0x48为 0100 1111
     I2C_SendByte(0xD1);       // 发送命令 0xD1,读取HSL数据的三个通道值，0xD0是读取RGB数据
     I2C_Stop();               // 停止信号
 
     I2C_Delay();  // 等待一小段时间
 
     I2C_Start();  // 重新启动，进入读模式
-    I2C_SendByte((0x48 << 1) | 1);  // 发送从机地址（读模式）
+    I2C_SendByte((0x4F << 1) | 1);  // 发送从机地址（读模式）
 
     // 接收数据
     recv_value[0] = I2C_ReadByte(1);  // 读第1个字节，发送 ACK

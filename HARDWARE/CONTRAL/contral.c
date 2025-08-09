@@ -829,7 +829,7 @@ void uart_handle(void)
 	uint8_t position_camera = 0;
 	uint8_t claw_mode=0;
 	int8_t move_mode=0;
-
+	uint16_t avg_hsl[3] = {0};
 	
 /*收到树莓派发送的数据包的格式：
 0xFF 
@@ -909,32 +909,25 @@ void uart_handle(void)
 
 			break;
 		}			
-		case 0x04:  //让单片机扫码
+		case 0x04:  //让单片机开始识别颜色
 		{
-			// UART5_Start_Scan();//发送扫码指令
-			// while(1)//如果没有接收到数据就一直等待
-			// {
-			// 	if(Serial5_GetRxFlag() == 1)//接收到了数据就处理
-			// 	{
-			// 		int16_t code1 =0; 
-			// 		int16_t code2 =0; 	
-			// 		delay_ms(300);//等待数据接收完全
-			// 		UART5_ParseCode(UART5_RX_BUF,&code1,&code2);//解析出二维码数据，此时UART5_BUX中依然存放的是二维码数据	
-			// 		u2_printf("tt3.txt=\"%d+%d\"",code1,code2);//多次发送给串口屏
-			// 		delay_ms(10);
-			// 		u2_printf("tt3.txt=\"%d+%d\"",code1,code2);
-			// 		delay_ms(10);
-			// 		u2_printf("t3.txt=\"%d+%d\"",code1,code2);
-			// 		delay_ms(10);
-			// 		u2_printf("t3.txt=\"%d+%d\"",code1,code2);
-			// 		delay_ms(10);
-			// 		u2_printf("tt3.txt=\"%d+%d\"",code1,code2);
-			// 		delay_ms(10);			
-			// 		break;
-			// 	}
-			// }
 
-
+			avg_hsl[0] = 0;
+			avg_hsl[1] = 0;
+			avg_hsl[2] = 0;
+			// 读取10次传感器数据，取平均值
+			for (int i = 0; i < 10; i++) {
+				I2C_Read_Sensor(color_value);
+				avg_hsl[0] += color_value[0];
+				avg_hsl[1] += color_value[1];
+				avg_hsl[2] += color_value[2];
+				delay_ms(100);  // 延时50ms，避免读取过快
+			}
+			avg_hsl[0] /= 10;  // H平均值
+			avg_hsl[1] /= 10;  // S平均值
+			avg_hsl[2] /= 10;  // L平均值
+			uint8_t hsl_arr[3] = {(uint8_t)avg_hsl[0], (uint8_t)avg_hsl[1], (uint8_t)avg_hsl[2]};
+			color = getClosestColor(hsl_arr);
 			break;
 		}	
 
@@ -1480,20 +1473,20 @@ void uart_handle(void)
 
 		}
 
-        case 0x27:   
+        case 0x35:   
 		{
 
-			
+			arrive_circle_capture();  //物块打靶
 			break;
 		}
 		case 0x30 :
 		{
-
+			arrive_most_up();  //升到最高
 			break;
 		}
 		case 0x31 :
 		{
-
+			arrive_most_down();  //降到最低
 				break;
 		}
 		case 0x32 :
@@ -1502,41 +1495,16 @@ void uart_handle(void)
 				break;
 		}
 
-		case 0x36 ://54
+		case 0x36 ://54  给树莓派发送识别到的颜色
 		{
-			UART1_SendString((uint8_t*)UART5_RX_BUF);  //给树莓派发送二维码信息
-
-			// UART5_ParseCode(UART5_RX_BUF,&code1,&code2);//解析出二维码数据，此时UART5_BUX中依然存放的是二维码数据	
-
-			// unsigned char data[8] ;
-			// data[0]=0xAB;
-			// data[1]= code1/100;
-			// data[2]= (code1/10)%10;
-			// data[3]= (code1)%10;
-			// data[4]= code2/100;
-			// data[5]= (code2/10)%10;
-			// data[6]= (code2)%10;
-			// data[7]=0xCD;
-			// UART1_SendArray(data,8);
-
-			u2_printf("tt3.txt=\"%d+%d\"",code1,code2);//多次发送给串口屏
-			delay_ms(10);
-			u2_printf("tt3.txt=\"%d+%d\"",code1,code2);
-			delay_ms(10);
-			u2_printf("t3.txt=\"%d+%d\"",code1,code2);
-			delay_ms(10);
-			u2_printf("t3.txt=\"%d+%d\"",code1,code2);
-			delay_ms(10);
-			u2_printf("tt3.txt=\"%d+%d\"",code1,code2);
-			delay_ms(10);		
-
+			UART_SendPacket2UP(color);  //给树莓派发送颜色信息
+			OLED_ShowString(90,0,"O",OLED_8X16);
+			OLED_Update();
 			break;
 		}
-		case 0x34 :
+		case 0x46 :
 		{
-
-
-
+			claw_open();  //张开爪子
 			break;
 		}
 		case 0x33 :

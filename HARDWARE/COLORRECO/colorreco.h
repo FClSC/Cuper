@@ -15,7 +15,7 @@
 #define I2C_SDA_READ() GPIO_ReadInputDataBit(I2C_SDA_PORT, I2C_SDA_PIN)
 
 extern uint8_t color_value[3];
-
+extern int color;
 void I2C_GPIO_Init(void);
 void I2C_Delay(void);
 void I2C_Stop(void);

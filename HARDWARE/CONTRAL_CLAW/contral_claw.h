@@ -23,7 +23,7 @@
 #define claw_most_up    250   //            升到最高的位置            
 #define camera_position  0       //               扫码的位置
 #define claw_most_down  0       //          降低到最低的位置
-#define circle_capture1  0   //          一层放置靶心识别的高度
+#define circle_capture1  80  //          一层放置靶心识别的高度
 #define circle_capture3  25   //     二层码垛靶心识别的高度   160 //
 #define circle_capture2  114    //物料盘颜色识别位置，要高于等会抓取物块的高度 //
 
