@@ -839,6 +839,10 @@ void uart_handle(void)
 6[二维码后三位高八位] 7[二维码后三位低八位]
 0xFE
                                                      */
+
+	OLED_ShowHexNum(0,32,mode,2,OLED_8X16);
+	OLED_Update();
+	
 	switch(mode)
 	{
 		case 0x01:  //x位移
@@ -912,6 +916,7 @@ void uart_handle(void)
 		case 0x04:  //让单片机开始识别颜色
 		{
 
+			delay_ms(200);  
 			avg_hsl[0] = 0;
 			avg_hsl[1] = 0;
 			avg_hsl[2] = 0;
@@ -1367,6 +1372,7 @@ void uart_handle(void)
 		case 0x13:
 		{
             ResetAng_Z(); //重置Z轴陀螺仪
+			base_angle=0;
 			break;
 		}	
 		case 0x14:
@@ -1670,7 +1676,7 @@ void claw_open(void)
 **********************/
 void claw_close(void)
 {
-		servo_angle2=95;
+		servo_angle2=91;
 		SERVO2_CONTRAL(servo_angle2);
 		delay_ms(25);
 		SERVO2_CONTRAL(servo_angle2);
@@ -1699,7 +1705,7 @@ void claw_close2(void)
 **********************/
 void claw_open1(void)
 {
-		servo_angle2=74;    //71
+		servo_angle2=75;    //71
 		SERVO2_CONTRAL(servo_angle2);
 		delay_ms(25);
 		SERVO2_CONTRAL(servo_angle2);
@@ -1736,7 +1742,7 @@ void claw_turn129(void)
 **********************/
 void claw_turn1(void)
 {
-		servo_angle3 = 132;   //   建议改成161
+		servo_angle3 = 130;   
 		SERVO3_CONTRAL(servo_angle3);
 }
 /********************
@@ -1746,7 +1752,7 @@ void claw_turn1(void)
 **********************/
 void claw_turn2(void)
 {
-		servo_angle3 = 160;
+		servo_angle3 = 157;
 		SERVO3_CONTRAL(servo_angle3);
 }
 /********************
@@ -1756,7 +1762,7 @@ void claw_turn2(void)
 **********************/
 void claw_turn3(void)
 {
-		servo_angle3=186;
+		servo_angle3=183;
 		SERVO3_CONTRAL(servo_angle3);
 }
 /********************
@@ -1766,7 +1772,7 @@ void claw_turn3(void)
 **********************/
 void claw_turn4(void)
 {
-		servo_angle3=214;
+		servo_angle3=209;
 		SERVO3_CONTRAL(215);
 }
 /********************
@@ -1776,7 +1782,7 @@ void claw_turn4(void)
 **********************/
 void claw_turn5(void)
 {
-		servo_angle3=242;
+		servo_angle3=239;
 		SERVO3_CONTRAL(250);
 }
 

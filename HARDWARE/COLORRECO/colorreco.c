@@ -133,6 +133,7 @@ void I2C_Read_Sensor(uint8_t *recv_value)
  */
 int getClosestColor(uint8_t hsl[3]) 
 {
+
     float h = hsl[0] / 240.0f * 360.0f;  // H标准化到 [0, 360)
     float s = hsl[1] / 240.0f;           // S标准化到 [0, 1]
     float l = hsl[2] / 240.0f;           // L标准化到 [0, 1]
@@ -182,10 +183,60 @@ int getClosestColor(uint8_t hsl[3])
     }
 }
 
+// /**
+//  * @brief 根据输入的HSL值（0-240范围）返回最接近的预定义颜色
+//  * @param hsl 输入的HSL数组，hsl[0]=H, hsl[1]=S, hsl[2]=L
+//  * @return 1（红）、2（绿）、3（蓝）、4（白）、5（黑）
+//  */
+// int getClosestColor(uint8_t hsl[3]) {
+//     // 预定义的模板颜色（需实际测量）
+//     const uint8_t COLOR_TEMPLATES[5][3] = {
+//         {0,   240, 120},  // 红
+//         {80,  200, 100},  // 绿
+//         {160, 200, 100},  // 蓝
+//         {0,   0,   240},  // 白
+//         {0,   0,   0}     // 黑
+//     };
+
+//     float min_diff = INFINITY;
+//     int closest_color = 1; // 默认红色
+
+//     // 遍历所有模板颜色，计算差异
+//     for (int i = 0; i < 5; i++) {
+//         // 计算色相差（注意环形处理）
+//         float dh = fminf(
+//             fabsf(hsl[0] - COLOR_TEMPLATES[i][0]),
+//             240 - fabsf(hsl[0] - COLOR_TEMPLATES[i][0])
+//         );
+//         // 饱和度和亮度差
+//         float ds = fabsf(hsl[1] - COLOR_TEMPLATES[i][1]);
+//         float dl = fabsf(hsl[2] - COLOR_TEMPLATES[i][2]);
+
+//         // 加权计算总差异（色相权重更高）
+//         float diff = dh * 0.6f + ds * 0.2f + dl * 0.2f;
+
+//         // 更新最接近的颜色
+//         if (diff < min_diff) {
+//             min_diff = diff;
+//             closest_color = i + 1; // 1~5对应红~黑
+//         }
+//     }
+
+//     return closest_color;
+// }
+
+
+void color_align(void)  //颜色校准函数，打印五种颜色对应的hsl值
+{
+    
 
 
 
 
+
+
+
+}
 
 
 

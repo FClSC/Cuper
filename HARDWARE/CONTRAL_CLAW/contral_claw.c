@@ -347,6 +347,8 @@ void claw_get_block1(void)
 	claw_open1();
 //	delay_ms(200);
 	arrive_most_up();	
+	delay_ms(300);
+	claw_turn0();
 	//support_turn120();
 	claw_open();
 
@@ -372,9 +374,11 @@ void claw_get_block2(void)
 	arrive_car_put();
 	claw_open1();
 //	delay_ms(200);
-	arrive_most_up();	
+	arrive_most_up();
+	delay_ms(300);
+	claw_turn0();	
 	//support_turn120();
-	// claw_open();
+	claw_open();
 
 }
 
@@ -399,6 +403,8 @@ void claw_get_block3(void)
 	claw_open1();
 //	delay_ms(200);
 	arrive_most_up();	
+	delay_ms(300);
+	claw_turn0();	
 	//support_turn120();
 	claw_open();
 
@@ -425,6 +431,8 @@ void claw_get_block4(void)
 	claw_open1();
 //	delay_ms(200);
 	arrive_most_up();	
+	delay_ms(300);
+	claw_turn0();	
 	//support_turn120();
 	claw_open();
 
@@ -451,6 +459,8 @@ void claw_get_block5(void)
 	claw_open1();
 //	delay_ms(200);
 	arrive_most_up();	
+	delay_ms(300);
+	claw_turn0();	
 	//support_turn120();
 	claw_open();
 
@@ -592,7 +602,7 @@ void claw_put_block4(void)
 	arrive_most_up(); 
     delay_ms(200);
 	claw_turn0();
-    delay_ms(1000);
+    delay_ms(500);
 	arrive_block_put();
 	delay_ms(200);	
 	claw_open();
@@ -622,7 +632,7 @@ void claw_put_block5(void)
 	arrive_most_up(); 
     delay_ms(200);
 	claw_turn0();
-    delay_ms(1200);
+    delay_ms(500);
 	arrive_block_put();
 	delay_ms(200);	
 	claw_open();
@@ -850,6 +860,6 @@ void claw_home(void)
 	arrive_most_up();
 	claw_open();
 	delay_ms(300);  
-	claw_turn1();
+	claw_turn3();
 }
 

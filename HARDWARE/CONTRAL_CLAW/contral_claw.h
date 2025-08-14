@@ -21,22 +21,22 @@
 
 */
 #define claw_most_up    250   //            升到最高的位置            
-#define camera_position  0       //               扫码的位置
-#define claw_most_down  0       //          降低到最低的位置
+#define camera_position  2       //               扫码的位置
+#define claw_most_down  2       //          降低到最低的位置
 #define circle_capture1  80  //          一层放置靶心识别的高度
 #define circle_capture3  25   //     二层码垛靶心识别的高度   160 //
 #define circle_capture2  114    //物料盘颜色识别位置，要高于等会抓取物块的高度 //
 
 //普通经典物块
-#define claw_block_get    5      //      地上抓物块的高度  4
+#define claw_block_get    4      //      地上抓物块的高度  4
 
-#define put_block_down   6       //      地上放物块的高度  4
+#define put_block_down   2       //      地上放物块的高度  4
 
 extern int16_t claw_block_get1 ;    //     从物料转盘上抓物块的高度    需要进行更改的，设为变量，可以软件进行修改  //
 
 #define claw_block_put   168 //        车上放物块的位置
 
-#define get_block_down    168   //       从车上抓取要把物块放下去的位置
+#define get_block_down    164   //       从车上抓取要把物块放下去的位置  168
 
 #define put_block_down2   87   //     把物块叠放在二层的高度   //
 

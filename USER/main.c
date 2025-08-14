@@ -32,25 +32,26 @@ int main(void)
 	system_Init();
 	contral_motor_Init();
 	claw_Init();
+	delay_ms(500);
 	arrive_most_down(); //到达最低高度
-	delay_ms(1000);
+	delay_ms(500);
 	ResetAng_Z(); 
 
 	// 初始化动作
-	claw_open();
-	delay_ms(200);
+	
+	
 	arrive_most_up();
 	delay_ms(300);
-	claw_turn1();
-
-
-	delay_ms(600);
-	claw_turn0();
+	claw_turn3();
 	delay_ms(200);
-	arrive_most_down(); //到达最低高度
+	claw_open();
 
-	delay_ms(200);
-	arrive_circle_capture(); 
+	// delay_ms(600);
+	// claw_turn0();
+	// delay_ms(200);
+	// arrive_most_down(); //到达最低高度
+
+	//test();
 
 
 
@@ -71,11 +72,11 @@ int main(void)
 		OLED_Printf(0,0,OLED_8X16,"Angle=%.3f",global_angle);
 		OLED_Printf(0,16,OLED_8X16,"BaseAngle=");
 		OLED_ShowSignedNum(64,16,base_angle,3,OLED_8X16);
-		OLED_Printf(0,32,OLED_8X16,"Err_Angle=%.3f",global_angle-base_angle);
+		//	OLED_Printf(0,32,OLED_8X16,"Err_Angle=%.3f",global_angle-base_angle);
 
 		OLED_Printf(0,48,OLED_8X16,"%d %d %d %d",color_value[0], color_value[1], color_value[2],color);
 		
-
+		// delay_ms(1000);
 		OLED_Update();
 
 	
@@ -83,11 +84,11 @@ int main(void)
 		if(Key_Get() == 1)//一键启动，如果按下，给工控机发送启动指令，同时令目标角度和串口屏显示为0
 		{
 			base_angle = 0;
-			arrive_most_up();
-			delay_ms(200);
-			claw_turn0();
-			delay_ms(200);
-			arrive_most_down(); //到达最低高度
+			// arrive_most_up();
+			// delay_ms(200);
+			// claw_turn0();
+			// delay_ms(400);
+			// arrive_most_down(); //到达最低高度
 
 
 
@@ -137,193 +138,29 @@ int main(void)
 
 void test(void) //测试程序
 {
-	// claw_get_block1();//转盘放车上
-	// delay_ms(1000);
-	// claw_get_block1();
-	// delay_ms(1000);
-	// claw_get_block1();
-	// delay_ms(1000);
 
-	// claw_get_block();//地上放车上，混动    1111
-	// delay_ms(1000);
-	// claw_get_block();
-	// delay_ms(1000);
-	// claw_get_block();
-	// delay_ms(1000);
 
-/////////////////////////////////////
-	// claw_turn0();
-	// claw_open();
-	// arrive_block_get();
-	// delay_ms(400);
-	// claw_close();
-	// delay_ms(400);
-	// arrive_most_up();//从地面抓起来物块并升到最高
 
-	// stepPosition=0;   //跑
-	// stepPosition1=0;  //抓
-	// MOTOR_Displacement(10,0);//移动到下一个需要从地上抓取物块的地方
-	// claw_turn1();
-	// delay_ms(600);
-	// arrive_car_put();
-	// while(1)
-	// {
-	// 	if((stepPosition == distance)&&(stepPosition1 == distance1))   //两个都完成
-	// 	{
-	// 		break;
-	// 	}
-		
-	// }
 
-	// claw_open1();
-	// delay_ms(300);
-	// arrive_most_up();
-	// claw_open();
-	// support_turn120();
-
-	// delay_ms(1000);
-
-	// claw_turn0();
-	// claw_open();
-	// arrive_block_get();
-	// delay_ms(400);
-	// claw_close();
-	// delay_ms(400);
-	// arrive_most_up();//从地面抓起来物块并升到最高
-
-	// stepPosition=0;   //跑
-	// stepPosition1=0;  //抓
-	// MOTOR_Displacement(10,0);//移动到下一个需要从地上抓取物块的地方
-	// claw_turn1();
-	// delay_ms(600);
-	// arrive_car_put();
-	// while(1)
-	// {
-	// 	if((stepPosition == distance)&&(stepPosition1 == distance1))   //两个都完成
-	// 	{
-	// 		break;
-	// 	}
-		
-	// }
-
-	// claw_open1();
-	// delay_ms(300);
-	// arrive_most_up();
-	// claw_open();
-	// support_turn120();
-
-	// delay_ms(1000);
-
-	// claw_turn0();
-	// claw_open();
-	// arrive_block_get();
-	// delay_ms(400);
-	// claw_close();
-	// delay_ms(400);
-	// arrive_most_up();//从地面抓起来物块并升到最高
-
-	// stepPosition=0;   //跑
-	// stepPosition1=0;  //抓
-	// MOTOR_Displacement(10,0);//移动到下一个需要从地上抓取物块的地方
-	// claw_turn1();
-	// delay_ms(600);
-	// arrive_car_put();
-	// while(1)
-	// {
-	// 	if((stepPosition == distance)&&(stepPosition1 == distance1))   //两个都完成
-	// 	{
-	// 		break;
-	// 	}
-		
-	// }
-
-	// claw_open1();
-	// delay_ms(300);
-	// arrive_most_up();
-	// claw_open();
-	// support_turn120();
-////////////////////////////////////
-
-	// claw_put_block();//车上放地上  222222
-	// delay_ms(1000);
-	// claw_put_block();
-	// delay_ms(1000);
-	// claw_put_block();
-	// delay_ms(1000);
-
-	// claw_put_blockF2();//车上放二层
-	// delay_ms(1000);
-	// claw_put_blockF2();
-	// delay_ms(1000);
-	// claw_put_blockF2();
-	// delay_ms(1000);
-
-	claw_put_block2();//车上放转盘
-	delay_ms(1000);
+	claw_get_block1();
+	delay_ms(2000);
+	claw_get_block2();
+	delay_ms(2000);
+	claw_get_block3();
+	delay_ms(2000);
+	claw_get_block4();
+	delay_ms(2000);
+	claw_get_block5();
+	delay_ms(2000);
+	claw_put_block1();
+	delay_ms(2000);
 	claw_put_block2();
-	delay_ms(1000);
-	claw_put_block2();
-	delay_ms(1000);
-
-
-///车上码二层
-
-
-	arrive_most_up();
-	claw_open1();       
-	claw_turn1();
-	delay_ms(600);
-	arrive_car_get();
-	claw_close();
-	delay_ms(300);	
-	arrive_most_up(); 
-	delay_ms(200);
-	claw_turn0();
-	delay_ms(300);
-	arrive_block_putF2();//和抓物料的高度一样先
-	delay_ms(500);	
-	claw_open();
-	delay_ms(300);
-	arrive_most_up();
-	support_turn120();
-
-	arrive_most_up();
-	claw_open1();       
-	claw_turn1();
-	delay_ms(600);
-	arrive_car_get();
-	claw_close();
-	delay_ms(300);	
-	arrive_most_up(); 
-	delay_ms(200);
-	claw_turn0();
-	delay_ms(300);
-	arrive_block_putF2();//和抓物料的高度一样先
-	delay_ms(500);	
-	claw_open();
-	delay_ms(300);
-	arrive_most_up();
-	support_turn120();
-
-	arrive_most_up();
-	claw_open1();       
-	claw_turn1();
-	delay_ms(600);
-	arrive_car_get();
-	claw_close();
-	delay_ms(300);	
-	arrive_most_up(); 
-	delay_ms(200);
-	claw_turn0();
-	delay_ms(300);
-	arrive_block_putF2();//和抓物料的高度一样先
-	delay_ms(500);	
-	claw_open();
-	delay_ms(300);
-	arrive_most_up();
-	support_turn120();
-
-
+	delay_ms(2000);
+	claw_put_block3();
+	delay_ms(2000);
+	claw_put_block4();
+	delay_ms(2000);
+	claw_put_block5();
 
 
 

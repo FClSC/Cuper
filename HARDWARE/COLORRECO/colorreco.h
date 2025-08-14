@@ -27,6 +27,7 @@ uint8_t I2C_ReadByte(uint8_t ack);
 void I2C_Read_Sensor(uint8_t *recv_value);
 
 int getClosestColor(uint8_t hsl[3]);
+void color_align(void) ; //颜色校准函数，打印五种颜色对应的hsl值
 
 
 
