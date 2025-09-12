@@ -42,19 +42,20 @@ SCL   PC12
 SDA   PD2
 
 ### 舵机区
-- Servo1   ==暂时没有用到==
+- Servo1   ==控制爪子机械臂==
 TIM5_CH2 PA1        输出PWM波
 - Servo2  ==控制爪子张开闭合==
 TIM5_CH3 PA2        输出PWM波
 - Servo3  ==控制爪子云台旋转==
 TIM5_CH4 PA3        输出PWM波
-
+- Servo4  ==控制爪子机械臂==
+TIM1_CH4  PA11      输出PWM波
 ###  步进电机区
 - MOTOR1   ==爪子升降==
 PA4    DIR
 PC5    ENM
 PB10   STEP      PA2重映射而来，TIM2_CH3   *==GPIO_PinRemapConfig(GPIO_FullRemap_TIM2,ENABLE)==*
-- MOTOR2   ==暂时没有用到==
+- MOTOR2   ==暂时没有用到==  意欲用于西安理工类似的机构，把爪子伸出去抓的那种
 PA5    DIR
 PC5    ENM
 PB11   STEP      PA3重映射而来，TIM2_CH4   *==GPIO_PinRemapConfig(GPIO_FullRemap_TIM2,ENABLE)==*

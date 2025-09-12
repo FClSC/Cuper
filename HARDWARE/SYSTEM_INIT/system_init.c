@@ -19,6 +19,6 @@ void system_Init(void)
 	//UART5_Init();
 	TIM6_COUNT_Init();
 	delay_ms(50);
-	WS2812_Init();
+	//WS2812_Init();
 }
 

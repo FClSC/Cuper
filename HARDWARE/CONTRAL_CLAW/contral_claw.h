@@ -42,7 +42,18 @@ extern int16_t claw_block_get1 ;    //     ╢снОаов╙елиов╔нО©И╣д╦ъ╤х    пХр╙╫Ьпп╦
 
 #define claw_block_putF2  165    //Ё╣ио╟янО©И╥е╣╫в╙ел╤Ч╡Ц╣д╦ъ╤х   //
 
-//╬ЖхЭнО©И
+
+#define servo1_angle_color   10     //╤Ф╩З1яуи╚й╤╠Пв╢л╛об╣д╫г╤х
+#define servo4_angle_color  10     //╤Ф╩З4яуи╚й╤╠Пв╢л╛об╣д╫г╤х
+
+//хннЯ╤ЧнО©И
+#define servo1_angle_init 110     //╤Ф╩З1уЩЁёв╢л╛об╣д╫г╤х
+#define servo4_angle_init 110      //╤Ф╩З4уЩЁёв╢л╛об╣д╫г╤х
+
+#define servo1_angle_task2  10     //╤Ф╩З1хннЯ2в╢л╛об╣д╫г╤х
+#define servo4_angle_task2 10     //╤Ф╩З4хннЯ2в╢л╛об╣д╫г╤х
+
+
 #define claw_block2_get    4      //      ╣ьиов╔нО©И2╣д╦ъ╤х  28
 
 #define put_block2_down   4       //      ╣ьио╥енО©И2╣д╦ъ╤х28

@@ -10,6 +10,7 @@ speedRampData srd2;
 uint8_t servo_angle1;
 uint8_t servo_angle2;
 uint16_t servo_angle3;
+uint8_t servo_angle4;
 
 extern int16_t base_angle; 
 extern int16_t code1 ;
@@ -34,6 +35,7 @@ int distance1=0;
 ********************************************/
 void contral_motor_Init(void)
 {
+	//MOTOR2_Init();  //伸出机构
 	MOTOR3_Init();
 	MOTOR4_Init();
 	MOTOR7_Init();
@@ -49,10 +51,14 @@ void claw_Init(void)
 {
 	MOTOR1_Init();//升降
 	//MOTOR5_Init();//转盘
+	Servo1_Init();
 	Servo2_Init();
 	Servo3_Init();
+	Servo4_Init();
 	claw_turn0();	
 	claw_open();
+
+	Servo_default();
 	claw.position_now=0;  
 	claw.position_target=0;
 	claw.position_temp=0;
@@ -166,7 +172,7 @@ void MSD_Move1(signed int step, unsigned int accel, unsigned int decel, unsigned
         srd1.step_delay = 1000;
         TIM_SetAutoreload(TIM2,Pulse_width);
         TIM_SetCompare3(TIM2,Pulse_width_comper); 
-				TIM_SetCompare4(TIM2,Pulse_width_comper); 
+		TIM_SetCompare4(TIM2,Pulse_width_comper); // ？没用感觉，理论21级学长是把这个电机Motor2当作Motor1的备用的
         TIM_Cmd(TIM2, ENABLE); 
      }
     else if(step != 0)
@@ -1601,64 +1607,58 @@ void claw_down2(void)
 		}
 	}
 }
-///********************
-//函数功能 : 爪子的向下  放第二层（1）
-//输入参数 : 无
-//输出参数 ：无
-//**********************/
-//void claw_down3(void)
-//{
-//	Motor1_DIR(0);
-//	distance1=6000;
-//	stepPosition1=0;
-//	MSD_Move1(6000,12,12,16);
-//	while(1)
-//	{
-//		if(stepPosition1 == distance1)
-//		{
-//			break;
-//		}
-//	}
-//}
-///********************
-//函数功能 : 爪子的向下  放第二层（2）
-//输入参数 : 无
-//输出参数 ：无
-//**********************/
-//void claw_down4(void)
-//{
-//	Motor1_DIR(0);
-//	distance1=5100;
-//	stepPosition1=0;
-//	MSD_Move1(5100,12,12,16);
-//	while(1)
-//	{
-//		if(stepPosition1 == distance1)
-//		{
-//			break;
-//		}
-//	}
-//}
 
-//void claw_up2(void)
-//{
-//	Motor1_DIR(1);
-//	distance1=3000;
-//	stepPosition1=0;
-//	MSD_Move1(3000,12,12,16);
-//	while(1)
-//	{
-//		if(stepPosition1 == distance1)
-//		{
-//			break;
-//		}
-//	}
-//}
-/********************
-函数功能 : 爪子的张开，大角度
-输入参数 : 无
-输出参数 ：无
-**********************/
+/********************************* 
+	// Servo1 110 Servo4 116  为竖直状态
+	// Servo1数值减小 为向外伸出
+	// Servo4 数值减小 为向内收缩
+
+	因此，angle1为负值，上舵机向外部伸出
+		angle4为负值，下舵机向内收缩
+
+
+
+*********************************/
+void Servo_SetAngle14(int16_t angle1,int16_t angle4)
+{
+
+
+	servo_angle1=110+angle1;
+	servo_angle4=116+angle4;
+
+	SERVO1_CONTRAL(servo_angle1);
+	SERVO4_CONTRAL(servo_angle4);
+	delay_ms(25);
+	SERVO1_CONTRAL(servo_angle1);
+	SERVO4_CONTRAL(servo_angle4);
+	delay_ms(25);	
+}
+
+/********************************* 
+
+机械臂的默认状态，实现普通物块的抓取与放置，包括放到车上
+
+
+*********************************/
+void Servo_default(void)
+{
+	Servo_SetAngle14(0,0);  
+}
+
+
+/********************************* 
+
+机械臂的伸出状态，实现冠亚季物块的放置
+避免位置不够
+
+
+*********************************/
+void Servo_Stretch(void)
+{
+	Servo_SetAngle14(-45,-43);  
+}
+
+
 
 void claw_open(void)
 {
@@ -1676,7 +1676,7 @@ void claw_open(void)
 **********************/
 void claw_close(void)
 {
-		servo_angle2=91;
+		servo_angle2=88;
 		SERVO2_CONTRAL(servo_angle2);
 		delay_ms(25);
 		SERVO2_CONTRAL(servo_angle2);
@@ -1742,7 +1742,7 @@ void claw_turn129(void)
 **********************/
 void claw_turn1(void)
 {
-		servo_angle3 = 130;   
+		servo_angle3 = 130;
 		SERVO3_CONTRAL(servo_angle3);
 }
 /********************
@@ -1804,88 +1804,3 @@ void support_turn67(void)
 {
 	MSD_Move2(400,1,1,2);
 }
-///********************
-//函数功能 : 爪子吧物块放到载物台
-//输入参数 : 无
-//输出参数 ：无
-//**********************/
-//void claw_in(void)
-//{
-//	claw_close();
-//	claw_up();          // 9600
-//	claw_turn129();
-//	delay_ms(1200);
-//	delay_ms(1200);
-//	claw_down2();       // -1500
-//	claw_open();
-//	claw_up2();         //  3000
-//	claw_turn0();
-//	support_turn120();
-//	delay_ms(1200);
-//	delay_ms(1200);
-//	claw_turn0();
-//	claw_down();        // -11100
-//	delay_ms(1200);	
-//	delay_ms(1200);
-//}
-///********************
-//函数功能 : 爪子吧物块拿出载物台 放到第一层
-//输入参数 : 无
-//输出参数 ：无
-//**********************/
-//void claw_out(void)
-//{
-//	claw_open();
-//	claw_up();          //   9600
-//	claw_turn129();
-//	delay_ms(1200);
-//	delay_ms(1200);
-//	claw_down2();       //  -1500
-//	claw_close();
-//	claw_up2();         //   3000
-//	claw_turn0();
-//	support_turn120();
-//	delay_ms(1200);
-//	delay_ms(1200);
-//	claw_turn0();
-//	claw_down();       //   -11100
-//	delay_ms(1200);	
-//	delay_ms(1200);
-//	claw_open();
-//}
-///********************
-//函数功能 : 爪子吧物块拿出载物台 放到第二层
-//输入参数 : 无
-//输出参数 ：无
-// //    高度5100
-//**********************/
-//void claw_out2(void)
-//{
-//	claw_open();
-//	claw_up();         //    9600
-//	claw_turn129();
-//	delay_ms(1200);
-//	delay_ms(1200);
-//	claw_down2();     //    -1500
-//	claw_close();
-//	claw_up2();       //     3000   
-//	claw_turn0();
-//	support_turn120();
-//	delay_ms(1200);
-//	delay_ms(1200);
-//	claw_turn0();
-//	claw_down3();     //    -6000
-//	delay_ms(1200);
-//	delay_ms(1200);	
-//	claw_open();
-////  12600-1500-6000 = 5100
-//}
-
-///***********************
-//摄像头位置
-//**********************/
-//void task1()
-//{
-//	
-//	
-//}

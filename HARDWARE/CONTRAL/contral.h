@@ -42,6 +42,7 @@ extern int distance1;
 extern uint8_t servo_angle1;
 extern uint8_t servo_angle2;
 extern uint16_t servo_angle3;
+extern uint8_t servo_angle4;
 
 typedef struct {
   //电机运行状态
@@ -104,7 +105,9 @@ void claw_up(void);
 void claw_up2(void);
 void claw_down(void);
 void claw_down2(void);
-void claw_down3(void);
+void Servo_SetAngle14(int16_t angle1,int16_t angle4);
+void Servo_default(void);
+void Servo_Stretch(void);
 void claw_open(void);
 void claw_open1(void);
 void claw_close(void);
@@ -112,9 +115,7 @@ void claw_close2(void);
 void claw_turn0(void);
 void claw_turn129(void);
 void support_turn120(void);
-void claw_in(void);
-void claw_out(void);
-void claw_out2(void);
+
 void claw_turn0(void);
 void claw_turn1(void);
 void claw_turn2(void);

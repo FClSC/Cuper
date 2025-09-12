@@ -1,6 +1,6 @@
 #include "time_count.h"
 
-void TIM6_COUNT_Init(void)  // 1s¶¨Ê±Æ÷ÖÐ¶Ï
+void TIM6_COUNT_Init(void)  
 {
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -33,8 +33,10 @@ void TIM6_IRQHandler(void)
 	{
 		flag=!flag;
 //		LED0=flag;
+		SERVO1_CONTRAL(servo_angle1);
 		SERVO2_CONTRAL(servo_angle2);
 		SERVO3_CONTRAL(servo_angle3);
+		SERVO4_CONTRAL(servo_angle4);
 	}
 	TIM_ClearITPendingBit(TIM6,TIM_IT_Update);
 }

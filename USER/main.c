@@ -37,14 +37,21 @@ int main(void)
 	delay_ms(500);
 	ResetAng_Z(); 
 
+	// Servo_SetAngle14(-20,-18);
+	// delay_ms(1000);
+
+	Servo_Stretch();
+
+	
+
 	// 初始化动作
 	
-	
-	arrive_most_up();
-	delay_ms(300);
-	claw_turn3();
-	delay_ms(200);
-	claw_open();
+
+	// arrive_most_up();
+	// delay_ms(300);
+	// claw_turn3();
+	// delay_ms(200);
+	// claw_open();
 
 	// delay_ms(600);
 	// claw_turn0();
@@ -52,11 +59,6 @@ int main(void)
 	// arrive_most_down(); //到达最低高度
 
 	//test();
-
-
-
-	
-
 
 
 
