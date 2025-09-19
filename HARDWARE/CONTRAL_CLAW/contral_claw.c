@@ -100,6 +100,7 @@ void arrive_camera(void)
 **********************/
 void arrive_most_up(void)
 {
+	//Servo_SetAngle14(-110,-116);
 	claw.position_target = claw_most_up;
 	claw.position_temp = claw.position_target - claw.position_now;
 	claw_position(claw.position_temp);
@@ -176,6 +177,43 @@ void arrive_block_get(void)
 void arrive_block_put(void)
 {
 	claw.position_target = put_block_down;
+	claw.position_temp = claw.position_target - claw.position_now;
+	claw_position(claw.position_temp);
+}
+
+/********************
+函数功能 : 到达冠军领奖台的高度
+输入参数 : 无
+输出参数 ：无
+**********************/
+void arrive_block_put_champion(void)
+{
+	claw.position_target = put_block_champion;
+	claw.position_temp = claw.position_target - claw.position_now;
+	claw_position(claw.position_temp);
+}
+
+
+/********************
+函数功能 : 到达亚军领奖台的高度
+输入参数 : 无
+输出参数 ：无
+**********************/
+void arrive_block_put_runnerup(void)
+{
+	claw.position_target = put_block_runnerup;
+	claw.position_temp = claw.position_target - claw.position_now;
+	claw_position(claw.position_temp);
+}
+
+/********************
+函数功能 : 到达季军领奖台的高度
+输入参数 : 无
+输出参数 ：无
+**********************/
+void arrive_block_put_num3(void)
+{
+	claw.position_target = put_block_num3;
 	claw.position_temp = claw.position_target - claw.position_now;
 	claw_position(claw.position_temp);
 }
@@ -641,6 +679,122 @@ void claw_put_block5(void)
 	
 }
 
+/********************
+函数功能 : 把机械臂调整到靶心识别的动作
+输入参数 : 无
+输出参数 ：无
+**********************/
+void claw_task2_reco(void)
+{
+
+	arrive_most_up();
+	delay_ms(200);
+	claw_turn0();
+	delay_ms(200);
+	Servo_Stretch();
+	delay_ms(300);
+	//高度降低到任务二奖杯放置专有打靶高度
+	arrive_circle_capture2();
+
+
+
+}
+
+
+
+
+/********************
+函数功能 : 爪子从车上把冠军放台子上
+输入参数 : 无
+输出参数 ：无
+**********************/
+void claw_put_champion(void)
+{
+    Servo_default();
+	arrive_most_up(); 
+	delay_ms(200);
+	claw_open1();   
+	claw_turn1();
+	delay_ms(1200);
+	arrive_car_get();
+//	delay_ms(300);
+	claw_close();
+	delay_ms(200);
+	arrive_most_up(); 
+    delay_ms(200);
+	claw_turn0();
+	delay_ms(200);
+	Servo_Stretch();
+    delay_ms(500);
+	arrive_block_put_champion();
+	delay_ms(200);	
+	claw_open();
+	arrive_circle_capture();
+	//support_turn120();
+	
+}
+
+/********************
+函数功能 : 爪子从车上把亚军放台子上
+输入参数 : 无
+输出参数 ：无
+**********************/
+void claw_put_runnerup(void)
+{
+    Servo_default();
+	arrive_most_up(); 
+	delay_ms(200);
+	claw_open1();   
+	claw_turn2();
+	delay_ms(1200);
+	arrive_car_get();
+//	delay_ms(300);
+	claw_close();
+	delay_ms(200);
+	arrive_most_up(); 
+    delay_ms(200);
+	claw_turn0();
+	delay_ms(200);
+	Servo_Stretch();
+    delay_ms(500);
+	arrive_block_put_runnerup();
+	delay_ms(200);	
+	claw_open();
+	arrive_circle_capture();
+	//support_turn120();
+	
+}
+/********************
+函数功能 : 爪子从车上把季军放台子上
+输入参数 : 无
+输出参数 ：无
+**********************/
+void claw_put_num3(void)
+{
+    Servo_default();
+	arrive_most_up(); 
+	delay_ms(200);
+	claw_open1();   
+	claw_turn3();
+	delay_ms(1200);
+	arrive_car_get();
+//	delay_ms(300);
+	claw_close();
+	delay_ms(200);
+	arrive_most_up(); 
+    delay_ms(200);
+	claw_turn0();
+	delay_ms(200);
+	Servo_Stretch();
+    delay_ms(500);
+	arrive_block_put_num3();
+	delay_ms(200);	
+	claw_open();
+	arrive_circle_capture();
+	//support_turn120();
+	
+}
+
 
 /********************
 函数功能 : 爪子把物块从车上放到二层
@@ -858,6 +1012,8 @@ void claw_put_block5(void)
 void claw_home(void)
 {
 	arrive_most_up();
+	Servo_default();
+	delay_ms(200);
 	claw_open();
 	delay_ms(300);  
 	claw_turn3();

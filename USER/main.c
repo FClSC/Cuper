@@ -4,14 +4,14 @@
 /*********************************************
 
 
-FClSc 2025/8/3
+瓜兵出击队 2025/9/12
 
 2025  Robcup中国机器人大赛 
 
-山东烟台  2025/8/17
+河北石家庄  2025/10/17
 
 车型智能搬运
-专项赛
+总决赛
 
 
 
@@ -33,32 +33,19 @@ int main(void)
 	contral_motor_Init();
 	claw_Init();
 	delay_ms(500);
-	arrive_most_down(); //到达最低高度
-	delay_ms(500);
+	//arrive_most_up(); //到达最高度
 	ResetAng_Z(); 
-
-	// Servo_SetAngle14(-20,-18);
-	// delay_ms(1000);
-
-	Servo_Stretch();
-
-	
-
 	// 初始化动作
-	
 
-	// arrive_most_up();
-	// delay_ms(300);
-	// claw_turn3();
-	// delay_ms(200);
-	// claw_open();
+	arrive_most_up();
+	delay_ms(300);
+	claw_turn3();
+	delay_ms(200);
+	claw_open();
 
-	// delay_ms(600);
-	// claw_turn0();
-	// delay_ms(200);
-	// arrive_most_down(); //到达最低高度
+	//claw_task2_reco(); //任务二物块识别位置
 
-	//test();
+
 
 
 
@@ -86,11 +73,11 @@ int main(void)
 		if(Key_Get() == 1)//一键启动，如果按下，给工控机发送启动指令，同时令目标角度和串口屏显示为0
 		{
 			base_angle = 0;
-			// arrive_most_up();
-			// delay_ms(200);
-			// claw_turn0();
-			// delay_ms(400);
-			// arrive_most_down(); //到达最低高度
+			arrive_most_up();
+			delay_ms(200);
+			claw_turn0();
+			delay_ms(400);
+			arrive_most_down(); //到达最低高度
 
 
 

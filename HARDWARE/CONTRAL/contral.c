@@ -57,7 +57,6 @@ void claw_Init(void)
 	Servo4_Init();
 	claw_turn0();	
 	claw_open();
-
 	Servo_default();
 	claw.position_now=0;  
 	claw.position_target=0;
@@ -1386,24 +1385,24 @@ void uart_handle(void)
            MOTOR_Align();  //靶心识别与转弯前/后进行姿态矫正
 			break;
 		}	
-		case 0x21:  
+		case 0x21:  //放置冠军奖杯
 		{
-
+			claw_put_champion();
 			break;
 		}
-		case 0x22: 
+		case 0x22: //放置亚军奖杯
 		{
-
+			claw_put_runnerup();
 			break;
 		}
-		case 0x23:  
+		case 0x23:  //放置季军奖杯
 		{
-
+			claw_put_num3();
 			break;
 		}
-		case 0x24: 
+		case 0x24: //任务二伸出去识别靶心
 		{
-
+			claw_task2_reco();
 			 break;
 		}
 		case 0x25:  
@@ -1505,6 +1504,12 @@ void uart_handle(void)
 		{
 			claw_turn0();
 				break;
+		}
+
+		case 0x34:  //机械臂回到默认状态
+		{
+			Servo_default();  
+			break;
 		}
 
 		case 0x36 ://54  给树莓派发送识别到的颜色
@@ -1619,12 +1624,12 @@ void claw_down2(void)
 
 
 *********************************/
-void Servo_SetAngle14(int16_t angle1,int16_t angle4)
+void Servo_SetAngle14(int16_t angle4,int16_t angle1)
 {
 
 
-	servo_angle1=110+angle1;
-	servo_angle4=116+angle4;
+	servo_angle1=116+angle1;
+	servo_angle4=110+angle4;
 
 	SERVO1_CONTRAL(servo_angle1);
 	SERVO4_CONTRAL(servo_angle4);
@@ -1676,7 +1681,7 @@ void claw_open(void)
 **********************/
 void claw_close(void)
 {
-		servo_angle2=88;
+		servo_angle2=92;
 		SERVO2_CONTRAL(servo_angle2);
 		delay_ms(25);
 		SERVO2_CONTRAL(servo_angle2);
@@ -1705,7 +1710,7 @@ void claw_close2(void)
 **********************/
 void claw_open1(void)
 {
-		servo_angle2=75;    //71
+		servo_angle2=73;    //71
 		SERVO2_CONTRAL(servo_angle2);
 		delay_ms(25);
 		SERVO2_CONTRAL(servo_angle2);
@@ -1719,7 +1724,7 @@ void claw_open1(void)
 **********************/
 void claw_turn0(void)
 {
-		servo_angle3=9;					//56
+		servo_angle3=11;					//56
 		SERVO3_CONTRAL(servo_angle3);      //56
 }
 
@@ -1752,7 +1757,7 @@ void claw_turn1(void)
 **********************/
 void claw_turn2(void)
 {
-		servo_angle3 = 157;
+		servo_angle3 = 158;
 		SERVO3_CONTRAL(servo_angle3);
 }
 /********************
@@ -1762,7 +1767,7 @@ void claw_turn2(void)
 **********************/
 void claw_turn3(void)
 {
-		servo_angle3=183;
+		servo_angle3=185;
 		SERVO3_CONTRAL(servo_angle3);
 }
 /********************
@@ -1772,7 +1777,7 @@ void claw_turn3(void)
 **********************/
 void claw_turn4(void)
 {
-		servo_angle3=209;
+		servo_angle3=211;
 		SERVO3_CONTRAL(215);
 }
 /********************
@@ -1782,7 +1787,7 @@ void claw_turn4(void)
 **********************/
 void claw_turn5(void)
 {
-		servo_angle3=239;
+		servo_angle3=240;
 		SERVO3_CONTRAL(250);
 }
 

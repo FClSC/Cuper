@@ -20,23 +20,23 @@
 ¼ÆËã¹«Ê½Îª£º×¦×ÓÂö³å¸ß¶È=99+(×ªÅÌÊµ¼Ê¸ß¶È-80)/20*24
 
 */
-#define claw_most_up    250   //            Éıµ½×î¸ßµÄÎ»ÖÃ            
+#define claw_most_up    255   //            Éıµ½×î¸ßµÄÎ»ÖÃ            
 #define camera_position  2       //               É¨ÂëµÄÎ»ÖÃ
-#define claw_most_down  2       //          ½µµÍµ½×îµÍµÄÎ»ÖÃ
+#define claw_most_down  10       //          ½µµÍµ½×îµÍµÄÎ»ÖÃ
 #define circle_capture1  80  //          Ò»²ã·ÅÖÃ°ĞĞÄÊ¶±ğµÄ¸ß¶È
-#define circle_capture3  25   //     ¶ş²ãÂë¶â°ĞĞÄÊ¶±ğµÄ¸ß¶È   160 //
+#define circle_capture3  25   //     ÈÎÎñ¶şÎï¿é·ÅÖÃ×¨ÓĞ´ò°Ğ¸ß¶È
 #define circle_capture2  114    //ÎïÁÏÅÌÑÕÉ«Ê¶±ğÎ»ÖÃ£¬Òª¸ßÓÚµÈ»á×¥È¡Îï¿éµÄ¸ß¶È //
 
 //ÆÕÍ¨¾­µäÎï¿é
-#define claw_block_get    4      //      µØÉÏ×¥Îï¿éµÄ¸ß¶È  4
+#define claw_block_get    15      //      µØÉÏ×¥Îï¿éµÄ¸ß¶È  4
 
-#define put_block_down   2       //      µØÉÏ·ÅÎï¿éµÄ¸ß¶È  4
+#define put_block_down   22      //      µØÉÏ·ÅÎï¿éµÄ¸ß¶È  4
 
 extern int16_t claw_block_get1 ;    //     ´ÓÎïÁÏ×ªÅÌÉÏ×¥Îï¿éµÄ¸ß¶È    ĞèÒª½øĞĞ¸ü¸ÄµÄ£¬ÉèÎª±äÁ¿£¬¿ÉÒÔÈí¼ş½øĞĞĞŞ¸Ä  //
 
-#define claw_block_put   168 //        ³µÉÏ·ÅÎï¿éµÄÎ»ÖÃ
+#define claw_block_put   181 //        ³µÉÏ·ÅÎï¿éµÄÎ»ÖÃ
 
-#define get_block_down    164   //       ´Ó³µÉÏ×¥È¡Òª°ÑÎï¿é·ÅÏÂÈ¥µÄÎ»ÖÃ  168
+#define get_block_down    182   //       ´Ó³µÉÏ×¥È¡Òª°ÑÎï¿é·ÅÏÂÈ¥µÄÎ»ÖÃ  168
 
 #define put_block_down2   87   //     °ÑÎï¿éµş·ÅÔÚ¶ş²ãµÄ¸ß¶È   //
 
@@ -65,6 +65,12 @@ extern int16_t claw_block_get1 ;    //     ´ÓÎïÁÏ×ªÅÌÉÏ×¥Îï¿éµÄ¸ß¶È    ĞèÒª½øĞĞ¸
 #define get_block2_down    132   //       ´Ó³µÉÏ×¥È¡Òª°ÑÎï¿é2·ÅÏÂÈ¥µÄÎ»ÖÃ
 
 #define put_block2_down2   87   //     °ÑÎï¿é2µş·ÅÔÚ¶ş²ãµÄ¸ß¶È
+
+#define put_block_champion 40   //     ¹Ú¾üÁì½±Ì¨µÄÎ»ÖÃ
+
+#define put_block_runnerup 20   //     ÑÇ¾ü¾üÁì½±Ì¨µÄÎ»ÖÃ
+
+#define put_block_num3 22   //         ¼¾¾üÁì½±Ì¨µÄÎ»ÖÃ
 
 
 typedef struct {
@@ -97,6 +103,10 @@ void arrive_car_get(void);
 void arrive_put_down2(void);
 void arrive_block_putF2(void);
 
+void arrive_block_put_champion(void);
+void arrive_block_put_runnerup(void);
+void arrive_block_put_num3(void);
+
 void arrive_block2_get(void);
 void arrive_block2_put(void);
 void arrive_block2_get1(void);
@@ -112,11 +122,17 @@ void claw_get_block3(void);
 void claw_get_block4(void);
 void claw_get_block5(void);
 
+void claw_task2_reco(void);
+
 void claw_put_block1(void);
 void claw_put_block2(void);
 void claw_put_block3(void);	
 void claw_put_block4(void);
 void claw_put_block5(void);
+
+void claw_put_num3(void);
+void claw_put_runnerup(void);
+void claw_put_champion(void);
 
 
 
