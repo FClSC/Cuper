@@ -75,6 +75,8 @@ int main(void)
 			base_angle = 0;
 			arrive_most_up();
 			delay_ms(200);
+			Servo_default();
+			delay_ms(200);
 			claw_turn0();
 			delay_ms(400);
 			arrive_most_down(); //到达最低高度

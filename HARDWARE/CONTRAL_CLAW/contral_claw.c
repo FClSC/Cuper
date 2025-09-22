@@ -687,7 +687,7 @@ void claw_put_block5(void)
 void claw_task2_reco(void)
 {
 
-	arrive_most_up();
+	//arrive_most_up();
 	delay_ms(200);
 	claw_turn0();
 	delay_ms(200);
@@ -715,7 +715,7 @@ void claw_put_champion(void)
 	delay_ms(200);
 	claw_open1();   
 	claw_turn1();
-	delay_ms(1200);
+	delay_ms(1000);
 	arrive_car_get();
 //	delay_ms(300);
 	claw_close();
@@ -725,7 +725,7 @@ void claw_put_champion(void)
 	claw_turn0();
 	delay_ms(200);
 	Servo_Stretch();
-    delay_ms(500);
+    delay_ms(400);
 	arrive_block_put_champion();
 	delay_ms(200);	
 	claw_open();

@@ -24,7 +24,7 @@
 #define camera_position  2       //               扫码的位置
 #define claw_most_down  10       //          降低到最低的位置
 #define circle_capture1  80  //          一层放置靶心识别的高度
-#define circle_capture3  25   //     任务二物块放置专有打靶高度
+#define circle_capture3  60   //     任务二物块放置专有打靶高度
 #define circle_capture2  114    //物料盘颜色识别位置，要高于等会抓取物块的高度 //
 
 //普通经典物块
